@@ -9,9 +9,20 @@ type ContributionData = {
 
 interface Props {
   contributions: ContributionData;
+  gap?: number;
+  borderRadius?: number;
+  darkMode?: boolean;
+  colorScheme?: string;
+  reverse?: boolean;
+  showTotalContributions?: boolean;
+  showProfileData?: boolean;
+  showTooltip?: boolean;
+  showWeekdays?: boolean;
+  showMonths?: boolean;
+  shareableSnapshot?: boolean;
 }
 
-export default function ContributionHeatmap({ contributions }: Props) {
+export default function ContributionHeatmap({ contributions, gap = 5, borderRadius = 3, darkMode = true, colorScheme = 'github', reverse = false, showTotalContributions = false, showProfileData = false, showTooltip = false, showWeekdays = false, showMonths = false, shareableSnapshot = false }: Props) {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [weekData, setWeekData] = useState<Array<Array<{date: string; count: number}>>>([]);
 
@@ -74,16 +85,17 @@ export default function ContributionHeatmap({ contributions }: Props) {
     <div className="flex flex-col w-full h-full bg-gray-700 rounded-lg p-4 pb-1">
       <div className="flex-grow">
         <div className="w-full h-full">
-          <div className="flex flex-wrap justify-around gap-[3px] h-full">
+          <div className={`flex flex-wrap justify-around gap-[${gap}px] h-full`}>
             {weekData.map((week, weekIndex) => (
               <div 
                 key={weekIndex} 
-                className="flex flex-col flex-grow gap-[3px] max-h-[60vh] h-fit"
+                className={`flex flex-col flex-grow gap-[${gap}px] max-h-[60vh] h-fit`}
               >
                 {week.map((day, dayIndex) => (
                   <div
                     key={`${weekIndex}-${dayIndex}`}
-                    className={`aspect-square w-full rounded-sm ${getColor(day.count)}`}
+                    className={`aspect-square w-full ${getColor(day.count)}`} 
+                    style={{ borderRadius: `${borderRadius}px` }}
                     title={day.date ? `${day.date}: ${day.count} contributions` : ''}
                   />
                 ))}
