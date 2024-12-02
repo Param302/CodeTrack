@@ -38,9 +38,11 @@ export default function Home() {
       <h2 className="text-2xl font-bold text-center">Track your coding progress</h2>
       <ContributionForm onFetch={handleFetch} isLoading={isLoading} />
       {isLoading && <p>Loading...</p>}
+      <section id="heatmap" className="w-3/5">
+        <ContributionHeatmap contributions={contributions} />
+      </section>
       {!isLoading && Object.keys(contributions).length > 0 && (
         <>
-          <ContributionHeatmap contributions={contributions} />
           <button
             onClick={handleUpdate}
             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"

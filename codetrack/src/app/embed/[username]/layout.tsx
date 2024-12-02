@@ -12,11 +12,7 @@ export default function EmbedLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-transparent m-0 p-0 min-h-screen">
-        <main className="w-full h-full p-2">
-          {children}
-        </main>
-      </body>
+      <body className="m-0 p-0">{children}</body>
     </html>
   );
 } 

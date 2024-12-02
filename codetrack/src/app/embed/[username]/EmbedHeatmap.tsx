@@ -28,8 +28,14 @@ export default function EmbedHeatmap({ username }: { username: string }) {
   }
 
   return (
-    <div className="w-full h-full px-2">
-      <ContributionHeatmap contributions={contributions} />
+    <div className="h-full flex items-center justify-center">
+      <div className="h-full " style={{ 
+        height: '100%', 
+        width: 'calc(100vh * (53/7) * 0.5)',
+        maxWidth: '100%'
+      }}>
+        <ContributionHeatmap contributions={contributions} />
+      </div>
     </div>
   );
 } 

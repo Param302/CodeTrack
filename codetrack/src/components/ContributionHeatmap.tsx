@@ -23,7 +23,6 @@ export default function ContributionHeatmap({ contributions }: Props) {
       const weeks: Array<Array<{date: string; count: number}>> = [];
       let currentWeek: Array<{date: string; count: number}> = [];
 
-      // Adjust first day to start from Sunday
       const startPadding = firstDay.getDay();
       for (let i = 0; i < startPadding; i++) {
         currentWeek.push({ date: '', count: 0 });
@@ -72,20 +71,19 @@ export default function ContributionHeatmap({ contributions }: Props) {
   }
 
   return (
-    <div className="flex flex-col w-full min-h-[150px] bg-gray-900 rounded-lg shadow-lg p-4">
+    <div className="flex flex-col w-full h-full bg-gray-700 rounded-lg p-4 pb-1">
       <div className="flex-grow">
-        <div className="w-full h-full min-h-[120px]">
-          <div className="flex flex-wrap gap-[2px]">
+        <div className="w-full h-full">
+          <div className="flex flex-wrap justify-around gap-[3px] h-full">
             {weekData.map((week, weekIndex) => (
               <div 
                 key={weekIndex} 
-                className="flex flex-col gap-[2px]"
-                style={{ minWidth: '12px' }}
+                className="flex flex-col flex-grow gap-[3px] max-h-[60vh] h-fit"
               >
                 {week.map((day, dayIndex) => (
                   <div
                     key={`${weekIndex}-${dayIndex}`}
-                    className={`aspect-square w-full rounded-[2px] ${getColor(day.count)}`}
+                    className={`aspect-square w-full rounded-sm ${getColor(day.count)}`}
                     title={day.date ? `${day.date}: ${day.count} contributions` : ''}
                   />
                 ))}
