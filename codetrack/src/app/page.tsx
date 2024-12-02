@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import ContributionForm from '../components/ContributionForm';
-import { fetchContributions } from '../utils/githubApi';
+import { getUserDetails } from '../utils/githubApi';
 
 type ContributionData = {
   contributionDays: {
@@ -18,8 +18,10 @@ export default function Home() {
 
   const handleFetch = async (username: string) => {
     setIsLoading(true);
-    const result = await fetchContributions(username);
-    setContributions(result);
+    const result = await getUserDetails(username);
+    if (result.contributions) {
+      setContributions(result.contributions);
+    }
     setIsLoading(false);
   };
 
