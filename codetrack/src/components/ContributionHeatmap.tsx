@@ -1,6 +1,7 @@
 'use client';
 
 import '@/app/globals.css';
+import { themes } from '@/utils/themes';
 import { useState, useEffect } from 'react';
 
 type ContributionData = {
@@ -12,7 +13,7 @@ interface Props {
   gap?: number;
   borderRadius?: number;
   darkMode?: boolean;
-  colorScheme?: string;
+  theme?: string;
   reverse?: boolean;
   showTotalContributions?: boolean;
   showProfileData?: boolean;
@@ -22,9 +23,11 @@ interface Props {
   shareableSnapshot?: boolean;
 }
 
-export default function ContributionHeatmap({ contributions, gap = 5, borderRadius = 3, darkMode = true, colorScheme = 'github', reverse = false, showTotalContributions = false, showProfileData = false, showTooltip = false, showWeekdays = false, showMonths = false, shareableSnapshot = false }: Props) {
+export default function ContributionHeatmap({ contributions, gap = 5, borderRadius = 3, darkMode = true, theme = 'github', reverse = false, showTotalContributions = false, showProfileData = false, showTooltip = false, showWeekdays = false, showMonths = false, shareableSnapshot = false }: Props) {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [weekData, setWeekData] = useState<Array<Array<{date: string; count: number}>>>([]);
+  const themeData = themes[theme];
+  console.log("THEME is ", themeData);
 
   useEffect(() => {
     console.log('Contributions received:', contributions);
@@ -66,11 +69,11 @@ export default function ContributionHeatmap({ contributions, gap = 5, borderRadi
   }, [selectedYear, contributions]);
 
   const getColor = (count: number) => {
-    if (count === 0) return 'bg-gray-800 dark:bg-gray-800';
-    if (count <= 3) return 'bg-green-900 dark:bg-green-900';
-    if (count <= 6) return 'bg-green-700 dark:bg-green-700';
-    if (count <= 9) return 'bg-green-500 dark:bg-green-500';
-    return 'bg-green-300 dark:bg-green-300';
+    if (count === 0) return themeData.colors[4];
+    if (count <= 3) return themeData.colors[3];
+    if (count <= 6) return themeData.colors[2];
+    if (count <= 9) return themeData.colors[1];
+    return themeData.colors[0];
   };
 
   const years = Array.from(
@@ -94,8 +97,8 @@ export default function ContributionHeatmap({ contributions, gap = 5, borderRadi
                 {week.map((day, dayIndex) => (
                   <div
                     key={`${weekIndex}-${dayIndex}`}
-                    className={`aspect-square w-full ${getColor(day.count)}`} 
-                    style={{ borderRadius: `${borderRadius}px` }}
+                    className={`aspect-square w-full`} 
+                    style={{ borderRadius: `${borderRadius}px`, backgroundColor: `${getColor(day.count)}` }}
                     title={day.date ? `${day.date}: ${day.count} contributions` : ''}
                   />
                 ))}

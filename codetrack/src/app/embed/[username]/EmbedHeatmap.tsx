@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import ContributionHeatmap from '@/components/ContributionHeatmap';
 import { getUserDetails } from '@/utils/githubApi';
 
-// gap is optional, if not provided, it will be calculated based on the height of the parent element
-export default function EmbedHeatmap({ username, gap, borderRadius, darkMode, colorScheme, reverse, showTotalContributions, showProfileData, showTooltip, showWeekdays, showMonths, shareableSnapshot }: { username: string, gap?: number, borderRadius?: number, darkMode?: boolean, colorScheme?: string, reverse?: boolean, showTotalContributions?: boolean, showProfileData?: boolean, showTooltip?: boolean, showWeekdays?: boolean, showMonths?: boolean, shareableSnapshot?: boolean }) {
+
+export default function EmbedHeatmap({ username, gap, borderRadius, darkMode, theme, reverse, showTotalContributions, showProfileData, showTooltip, showWeekdays, showMonths, shareableSnapshot }: { username: string, gap?: number, borderRadius?: number, darkMode?: boolean, theme?: string, reverse?: boolean, showTotalContributions?: boolean, showProfileData?: boolean, showTooltip?: boolean, showWeekdays?: boolean, showMonths?: boolean, shareableSnapshot?: boolean }) {
   const [contributions, setContributions] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -28,12 +28,13 @@ export default function EmbedHeatmap({ username, gap, borderRadius, darkMode, co
       </div>
     );
   }
+  console.log("Theme received is ", theme);
 
   return (
-    <div className="h-full flex items-center justify-center">
+    <div className="h-full flex items-center justify-center bg-transparent">
       <div className="h-full" style={{ 
         height: '100%', 
-        width: 'calc(100vh * (53/7) * 0.5)',
+        width: 'calc(100vh * (53/7) * 0.7)',
         maxWidth: '100%'
       }}>
         <ContributionHeatmap 
@@ -41,7 +42,7 @@ export default function EmbedHeatmap({ username, gap, borderRadius, darkMode, co
           gap={gap} 
           borderRadius={borderRadius}
           darkMode={darkMode}
-          colorScheme={colorScheme}
+          theme={theme}
           reverse={reverse}
           showTotalContributions={showTotalContributions}
           showProfileData={showProfileData}

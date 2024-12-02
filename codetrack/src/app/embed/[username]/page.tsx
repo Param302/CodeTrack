@@ -1,13 +1,27 @@
 import EmbedHeatmap from './EmbedHeatmap'
 
-// Server Component
-// gap is being passed in as a query parameter
-export default function Page({ 
-  params,
-  searchParams
-}: { 
-  params: { username: string },
-  searchParams?: { gap?: number, borderRadius?: number, darkMode?: boolean, colorScheme?: string, reverse?: boolean, showTotalContributions?: boolean, showProfileData?: boolean, showTooltip?: boolean, showWeekdays?: boolean, showMonths?: boolean, shareableSnapshot?: boolean }
+
+export default async function Page({
+    params: rawParams,
+    searchParams: rawSearchParams
+}: {
+    params: { username: string },
+    searchParams?: { [key: string]: string | string[] | undefined }
 }) {
-  return <EmbedHeatmap username={params.username} gap={searchParams?.gap} borderRadius={searchParams?.borderRadius} darkMode={searchParams?.darkMode} colorScheme={searchParams?.colorScheme} reverse={searchParams?.reverse} showTotalContributions={searchParams?.showTotalContributions} showProfileData={searchParams?.showProfileData} showTooltip={searchParams?.showTooltip} showWeekdays={searchParams?.showWeekdays} showMonths={searchParams?.showMonths} shareableSnapshot={searchParams?.shareableSnapshot} />;
+    const params = await Promise.resolve(rawParams);
+    const searchParams = await Promise.resolve(rawSearchParams);
+    
+    return <EmbedHeatmap
+        username={params.username}
+        gap={searchParams?.gap ? Number(searchParams.gap) : undefined}
+        borderRadius={searchParams?.borderRadius ? Number(searchParams.borderRadius) : undefined}
+        darkMode={searchParams?.darkMode === 'true'}
+        theme={searchParams?.theme?.toString()}
+        reverse={searchParams?.reverse === 'true'}
+        showTotalContributions={searchParams?.showTotalContributions === 'true'}
+        showProfileData={searchParams?.showProfileData === 'true'}
+        showTooltip={searchParams?.showTooltip === 'true'}
+        showWeekdays={searchParams?.showWeekdays === 'true'}
+        showMonths={searchParams?.showMonths === 'true'}
+        shareableSnapshot={searchParams?.shareableSnapshot === 'true'} />;
 } 
