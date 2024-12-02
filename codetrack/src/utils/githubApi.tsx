@@ -113,6 +113,7 @@ export const fetchPreviousYearContributions = async (username: string, fromDate:
                     toDate
                 }
             }),
+            cache: 'force-cache'
         });
         const data = await response.json();
         return data.data.user.contributionsCollection.contributionCalendar.weeks;
@@ -135,6 +136,7 @@ const fetchCurrentYearContributions = async (username: string) => {
                 query: contributionsQuery,
                 variables: { username, fromDate: new Date(currentDate.getFullYear(), 0, 1).toISOString(), toDate: currentDate.toISOString() }
             }),
+            cache: 'no-store'
         });
         const data = await response.json();
         return data.data.user.contributionsCollection.contributionCalendar.weeks;

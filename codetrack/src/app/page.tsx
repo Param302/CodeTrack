@@ -51,16 +51,6 @@ export default function Home() {
                 <td className="border px-4 py-2">{contributionCount}</td>
               </tr>
             ))}
-            {/* {
-              contributions.map(week => (
-                week.contributionDays.filter(day => day.contributionCount > 0).map(day => (
-                <tr key={day.date}>
-                  <td className="border px-4 py-2">{new Date(day.date).toLocaleDateString()}</td>
-                  <td className="border px-4 py-2">{day.contributionCount}</td>
-                  </tr>
-                ))
-              ))
-            } */}
           </tbody>
         </table>
       </div>
