@@ -205,11 +205,18 @@ export const updateUserDetails = async (username: string) => {
     console.log("User details", userDetails);
 
     const currentYearContributions = await fetchCurrentYearContributions(username);
+    // force update current year contributions
     if (currentYearContributions) {
         const contributionsMap = convertWeeksToContributionsMap(currentYearContributions);
+        const currentYear = new Date().getFullYear();
+        // Filter out current year dates from existing contributions
+        const filteredContributions = Object.entries(userDetailsAndContributions[username].contributions || {})
+            .filter(([date]) => !date.startsWith(currentYear.toString()))
+            .reduce((acc, [date, contributionCount]) => ({ ...acc, [date]: contributionCount }), {});
+        
         userDetailsAndContributions[username].contributions = {
-            ...userDetailsAndContributions[username].contributions,
-            ...contributionsMap
+            ...contributionsMap,
+            ...filteredContributions
         };
     }
     console.log("Current year contributions", userDetailsAndContributions[username].contributions);
