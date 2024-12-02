@@ -21,6 +21,20 @@ type ContributionWeek = {
     contributionDays: ContributionDay[];
 };
 
+type ContributionsMap = {
+    [date: string]: number;
+};
+
+type UserDetailsAndContributions = {
+    userDetails: UserDetails | null;
+    contributions: ContributionsMap | null;
+};
+
+type UserDetailsMap = {
+    [username: string]: UserDetailsAndContributions;
+};
+
+let userDetailsAndContributions: UserDetailsMap = {};
 
 const userQuery = `
 query($username: String!) {
@@ -58,7 +72,7 @@ query($username: String!, $fromDate: DateTime!, $toDate: DateTime!) {
     }
 }`;
 
-const fetchUserDetails = async (username: string): Promise<UserDetails | null> => {
+export const fetchUserDetails = async (username: string): Promise<UserDetails | null> => {
     try {
         const response = await fetch(GITHUB_API_URL, {
             method: 'POST',
@@ -82,7 +96,7 @@ const fetchUserDetails = async (username: string): Promise<UserDetails | null> =
     }
 };
 
-const fetchContributions = async (username: string, fromDate: string, toDate: string) => {
+export const fetchPreviousYearContributions = async (username: string, fromDate: string, toDate: string) => {
 
     try {
         const response = await fetch(GITHUB_API_URL, {
@@ -101,21 +115,51 @@ const fetchContributions = async (username: string, fromDate: string, toDate: st
             }),
         });
         const data = await response.json();
-        console.log("RAW cont", data);
-
-        if ('data' in data) {
-            return data.data.user.contributionsCollection.contributionCalendar.weeks;
-        }
-        return data.contributionsCollection.contributionCalendar.weeks;
+        return data.data.user.contributionsCollection.contributionCalendar.weeks;
     } catch (error) {
         console.error('Error fetching contributions:', error);
         return null;
     }
 };
 
+const fetchCurrentYearContributions = async (username: string) => {
+    const currentDate = new Date();
+    try {
+        const response = await fetch(GITHUB_API_URL, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                query: contributionsQuery,
+                variables: { username, fromDate: new Date(currentDate.getFullYear(), 0, 1).toISOString(), toDate: currentDate.toISOString() }
+            }),
+        });
+        const data = await response.json();
+        return data.data.user.contributionsCollection.contributionCalendar.weeks;
+    } catch (error) {
+        console.error('Error fetching current year contributions:', error);
+        return null;
+    }
+
+
+}
+
+// Helper function to convert weeks array to contributions map
+const convertWeeksToContributionsMap = (weeks: ContributionWeek[]): ContributionsMap => {
+    return weeks.reduce((acc: ContributionsMap, week) => {
+        week.contributionDays.forEach(day => {
+            acc[day.date] = day.contributionCount;
+        });
+        return acc;
+    }, {});
+};
+
 export const getUserDetails = async (username: string) => {
     const userDetails = await fetchUserDetails(username);
     console.log("User details", userDetails);
+    userDetailsAndContributions[username] = { userDetails, contributions: {} };
 
     if (!userDetails) {
         return { userDetails: null, contributions: null };
@@ -124,8 +168,6 @@ export const getUserDetails = async (username: string) => {
     const createdAt = new Date(year, month - 1, date);
     const toDate = new Date();
     console.log("Created at", createdAt);
-
-    let contributions: ContributionWeek[] = [];
 
     let currentDate = createdAt;
 
@@ -138,15 +180,36 @@ export const getUserDetails = async (username: string) => {
         console.log("From date", fromDate);
         console.log("To date", toDate);
 
-        const yearlyContributions = await fetchContributions(username, fromDate, toDate);
+        const yearlyContributions = await fetchPreviousYearContributions(username, fromDate, toDate);
         if (yearlyContributions) {
-            contributions = contributions.concat(yearlyContributions);
+            const contributionsMap = convertWeeksToContributionsMap(yearlyContributions);
+            userDetailsAndContributions[username].contributions = {
+                ...userDetailsAndContributions[username].contributions,
+                ...contributionsMap
+            };
         }
         currentDate = new Date(currentDate.getFullYear() + 1, 0, 1);
         console.log("Now currentDate", currentDate);
     }
+    
+    console.log("Contributions", userDetailsAndContributions[username].contributions);
 
-    console.log("Contributions", contributions);
+    return userDetailsAndContributions[username];
+};
 
-    return { userDetails, contributions };
+export const updateUserDetails = async (username: string) => {
+    const userDetails = await fetchUserDetails(username);
+    console.log("User details", userDetails);
+
+    const currentYearContributions = await fetchCurrentYearContributions(username);
+    if (currentYearContributions) {
+        const contributionsMap = convertWeeksToContributionsMap(currentYearContributions);
+        userDetailsAndContributions[username].contributions = {
+            ...userDetailsAndContributions[username].contributions,
+            ...contributionsMap
+        };
+    }
+    console.log("Current year contributions", userDetailsAndContributions[username].contributions);
+
+    return userDetailsAndContributions[username];
 };
