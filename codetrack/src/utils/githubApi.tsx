@@ -168,16 +168,17 @@ export const getUserDetails = async (username: string) => {
     }
     const [year, month, date] = userDetails.createdAt.split('T')[0].split('-').map(Number);
     const createdAt = new Date(year, month - 1, date);
-    const toDate = new Date();
+    const lastDate = new Date(new Date().getFullYear(), 11, 31);
+    console.log("End date", lastDate);
     console.log("Created at", createdAt);
 
     let currentDate = createdAt;
 
-    while (currentDate <= toDate) {
+    while (currentDate <= lastDate) {
         const fromDate = currentDate.toISOString();
         let toDate = new Date(currentDate.getFullYear() + 1, 0, 1).toISOString();
-        if (toDate > new Date().toISOString()) {
-            toDate = new Date().toISOString();
+        if (toDate > lastDate.toISOString()) {
+            toDate = lastDate.toISOString();
         };
         console.log("From date", fromDate);
         console.log("To date", toDate);

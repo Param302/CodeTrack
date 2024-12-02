@@ -9,6 +9,7 @@ CodeTrack is a simple tool to visualize your GitHub contribution heatmap.
 - `height`: The height of the heatmap, in pixels. Defaults to `300px`.
 
 ### parameters
+- `size`: the size of the heatmap in pixels. Defaults to `1x`. Can be (`0.5x`, `2x`, `3x` or any multiple of `0.5` upto `10x`).
 - `gap`: the gap between the squares in pixels. Defaults to `5`.
 - `borderRadius`: the border radius of the squares in pixels. Defaults to `3`.
 - `darkMode`: whether to use dark mode. Defaults to `true`.
