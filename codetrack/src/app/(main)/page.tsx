@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import ContributionForm from '../components/ContributionForm';
-import { getUserDetails, updateUserDetails } from '../utils/githubApi';
+import ContributionForm from '@/components/ContributionForm';
+import { getUserDetails, updateUserDetails } from '@/utils/githubApi';
+import ContributionHeatmap from '@/components/ContributionHeatmap';
 
 type ContributionData = {
   [date: string]: number;
@@ -37,13 +38,16 @@ export default function Home() {
       <h2 className="text-2xl font-bold text-center">Track your coding progress</h2>
       <ContributionForm onFetch={handleFetch} isLoading={isLoading} />
       {isLoading && <p>Loading...</p>}
-      {!isLoading && contributions && (
-        <button
-          onClick={handleUpdate}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Update Data
-        </button>
+      {!isLoading && Object.keys(contributions).length > 0 && (
+        <>
+          <ContributionHeatmap contributions={contributions} />
+          <button
+            onClick={handleUpdate}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Update Data
+          </button>
+        </>
       )}
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto border-collapse">
