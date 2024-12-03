@@ -1,25 +1,28 @@
 import EmbedHeatmap from './EmbedHeatmap';
 
 interface PageProps {
-  params: { username: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<{ username: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
+  const resolvedParams = await params;
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+
   return (
     <EmbedHeatmap
-      username={params.username}
-      gap={searchParams?.gap ? Number(searchParams.gap) : undefined}
-      borderRadius={searchParams?.borderRadius ? Number(searchParams.borderRadius) : undefined}
-      darkMode={searchParams?.darkMode === 'true'}
-      theme={searchParams?.theme?.toString()}
-      reverse={searchParams?.reverse === 'true'}
-      showTotalContributions={searchParams?.showTotalContributions === 'true'}
-      showProfileData={searchParams?.showProfileData === 'true'}
-      showTooltip={searchParams?.showTooltip === 'true'}
-      showWeekdays={searchParams?.showWeekdays === 'true'}
-      showMonths={searchParams?.showMonths === 'true'}
-      shareableSnapshot={searchParams?.shareableSnapshot === 'true'}
+      username={resolvedParams.username}
+      gap={resolvedSearchParams?.gap ? Number(resolvedSearchParams.gap) : undefined}
+      borderRadius={resolvedSearchParams?.borderRadius ? Number(resolvedSearchParams.borderRadius) : undefined}
+      darkMode={resolvedSearchParams?.darkMode === 'true'}
+      theme={resolvedSearchParams?.theme?.toString()}
+      reverse={resolvedSearchParams?.reverse === 'true'}
+      showTotalContributions={resolvedSearchParams?.showTotalContributions === 'true'}
+      showProfileData={resolvedSearchParams?.showProfileData === 'true'}
+      showTooltip={resolvedSearchParams?.showTooltip === 'true'}
+      showWeekdays={resolvedSearchParams?.showWeekdays === 'true'}
+      showMonths={resolvedSearchParams?.showMonths === 'true'}
+      shareableSnapshot={resolvedSearchParams?.shareableSnapshot === 'true'}
     />
   );
 } 

@@ -3,10 +3,9 @@
 import ContributionHeatmap from '@/components/ContributionHeatmap';
 import { getUserDetails } from '@/utils/githubApi';
 import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 
-export default function EmbedPage() {
+function EmbedPageContent() {
   const searchParams = useSearchParams();
   const [contributions, setContributions] = useState({});
   const [loading, setLoading] = useState(true);
@@ -47,3 +46,11 @@ export default function EmbedPage() {
     />
   );
 } 
+
+export default function EmbedPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EmbedPageContent />
+    </Suspense>
+  );
+}

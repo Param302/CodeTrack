@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import '@/app/globals.css';
 
 export const metadata = {
@@ -8,7 +9,7 @@ export const metadata = {
 export default function EmbedLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html lang="en">
