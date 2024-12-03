@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ContributionForm from '@/components/ContributionForm';
 import { getUserDetails, updateUserDetails } from '@/utils/githubApi';
 import ContributionHeatmap from '@/components/ContributionHeatmap';
@@ -8,6 +8,21 @@ import ContributionHeatmap from '@/components/ContributionHeatmap';
 type ContributionData = {
   [date: string]: number;
 };
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'github-heatmap': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & {
+          username: string;
+          width: string;
+          scale: string;
+        },
+        HTMLElement
+      >;
+    }
+  }
+}
 
 export default function Home() {
 
@@ -33,6 +48,17 @@ export default function Home() {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'http://localhost:3000/github-widget';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <main className="my-32 flex flex-col items-center gap-12">
       <h2 className="text-2xl font-bold text-center">Track your coding progress</h2>
@@ -41,6 +67,12 @@ export default function Home() {
       <section id="heatmap" className="w-3/5">
         <ContributionHeatmap contributions={contributions} />
       </section>
+      <github-heatmap
+        username="param302"
+        width="800"
+        scale="1"
+      ></github-heatmap>
+        <iframe src="http://localhost:3000/embed/param302" className="w-3/5" />
       {!isLoading && Object.keys(contributions).length > 0 && (
         <>
           <button
