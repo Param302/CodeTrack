@@ -50,7 +50,7 @@ export default function Home() {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'http://localhost:3000/github-widget';
+    script.src = `${process.env.NEXT_PUBLIC_APP_URL}/github-widget`;
     script.async = true;
     document.body.appendChild(script);
 
@@ -72,7 +72,10 @@ export default function Home() {
         width="800"
         scale="1"
       ></github-heatmap>
-        <iframe src="http://localhost:3000/embed/param302" className="w-3/5" />
+        <iframe 
+          src={`${process.env.NEXT_PUBLIC_APP_URL}/embed/param302`} 
+          className="w-3/5" 
+        />
       {!isLoading && Object.keys(contributions).length > 0 && (
         <>
           <button

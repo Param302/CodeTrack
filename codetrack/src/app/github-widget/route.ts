@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+  console.log("Base URL is ", baseUrl);
   const widgetCode = `
     class GithubHeatmap extends HTMLElement {
       constructor() {
@@ -9,6 +11,8 @@ export async function GET(request: Request) {
       }
 
       async render() {
+        const baseUrl = '${baseUrl}';
+        console.log("Now baseUrl is ", baseUrl);
         const username = this.getAttribute('username');
         const width = this.getAttribute('width');
         const scale = this.getAttribute('scale') || 1;
@@ -40,7 +44,7 @@ export async function GET(request: Request) {
           });
           
         const iframe = document.createElement('iframe');
-        iframe.src = \`http://localhost:3000/embed/\${username}?\${params.toString()}\`;
+        iframe.src = \`\${baseUrl}/embed/\${username}?\${params.toString()}\`;
         iframe.frameBorder = '0';
         iframe.style.width = width + 'px';
         iframe.style.height = ((width / 53) * 8 + 30) + 'px';
