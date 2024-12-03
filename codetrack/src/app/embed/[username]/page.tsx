@@ -1,14 +1,16 @@
 import EmbedHeatmap from './EmbedHeatmap';
 
-type Props = {
-  params: { username: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+interface PageProps {
+  params: Promise<{ username: string }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
 
-export default function Page({ params, searchParams }: Props) {
+export default async function Page({ params, searchParams }: PageProps) {
+  const resolvedParams = await params;
+  
   return (
     <EmbedHeatmap
-      username={params.username}
+      username={resolvedParams.username}
       gap={searchParams?.gap ? Number(searchParams.gap) : undefined}
       borderRadius={searchParams?.borderRadius ? Number(searchParams.borderRadius) : undefined}
       darkMode={searchParams?.darkMode === 'true'}
