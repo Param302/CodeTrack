@@ -11,7 +11,7 @@ export async function GET(request: Request) {
       }
 
       async render() {
-        const baseUrl = 'https://code-track.vercel.app';
+        const baseUrl = 'http://localhost:3000';
         console.log("Now baseUrl is ", baseUrl);
         const username = this.getAttribute('username');
         const width = this.getAttribute('width');
