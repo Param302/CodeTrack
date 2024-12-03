@@ -1,12 +1,14 @@
 import EmbedHeatmap from './EmbedHeatmap'
 
+type PageProps = {
+    params: { username: string },
+    searchParams?: { [key: string]: string | string[] | undefined }
+};
+
 export default async function Page({
     params: rawParams,
     searchParams: rawSearchParams
-}: {
-    params: { username: string },
-    searchParams?: { [key: string]: string | string[] | undefined }
-}) {
+}: PageProps) {
     const params = await Promise.resolve(rawParams);
     const searchParams = await Promise.resolve(rawSearchParams);
     
