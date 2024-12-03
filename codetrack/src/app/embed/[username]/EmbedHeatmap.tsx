@@ -5,7 +5,7 @@ import ContributionHeatmap from '@/components/ContributionHeatmap';
 import { getUserDetails } from '@/utils/githubApi';
 
 
-export default function EmbedHeatmap({ username, gap, borderRadius, darkMode, theme, reverse, showTotalContributions, showProfileData, showTooltip, showWeekdays, showMonths, shareableSnapshot }: { username: string, gap?: number, borderRadius?: number, darkMode?: boolean, theme?: string, reverse?: boolean, showTotalContributions?: boolean, showProfileData?: boolean, showTooltip?: boolean, showWeekdays?: boolean, showMonths?: boolean, shareableSnapshot?: boolean }) {
+export default function EmbedHeatmap({ username, width, gap, borderRadius, darkMode, theme, reverse, showTotalContributions, showProfileData, showTooltip, showWeekdays, showMonths, shareableSnapshot }: { username: string, width?: number, gap?: number, borderRadius?: number, darkMode?: boolean, theme?: string, reverse?: boolean, showTotalContributions?: boolean, showProfileData?: boolean, showTooltip?: boolean, showWeekdays?: boolean, showMonths?: boolean, shareableSnapshot?: boolean }) {
   const [contributions, setContributions] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -29,14 +29,14 @@ export default function EmbedHeatmap({ username, gap, borderRadius, darkMode, th
     );
   }
   console.log("Theme received is ", theme);
+  console.log("I have width", width);
 
   return (
-    <div className="h-full flex items-center justify-center bg-transparent">
-      <div className="h-full" style={{ 
-        height: '100%', 
-        width: 'calc(100vh * (53/7) * 0.7)',
-        maxWidth: '100%'
-      }}>
+    <div className="w-full h-full">
+      {/* <div style={{ 
+        width: width ? `${width}px` : '900px',  // Fixed width
+        height: 
+      }}> */}
         <ContributionHeatmap 
           contributions={contributions} 
           gap={gap} 
@@ -52,6 +52,6 @@ export default function EmbedHeatmap({ username, gap, borderRadius, darkMode, th
           shareableSnapshot={shareableSnapshot}
         />
       </div>
-    </div>
+    // </div>
   );
 }
