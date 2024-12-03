@@ -88,11 +88,14 @@ export default function ContributionHeatmap({ contributions, gap = 5, borderRadi
     <div className="flex flex-col w-full h-full bg-gray-700 rounded-lg p-4 pb-1">
       <div className="flex-grow">
         <div className="w-full h-full">
-          <div className={`flex flex-wrap justify-around gap-[${gap}px] h-full`}>
+          <div className={`flex flex-wrap justify-around h-full`}
+          style={{ gap: `${gap}px` }}
+          >
             {weekData.map((week, weekIndex) => (
               <div 
                 key={weekIndex} 
-                className={`flex flex-col flex-grow gap-[${gap}px] max-h-[60vh] h-fit`}
+                className={`flex flex-col flex-grow max-h-[60vh] h-fit`}
+                style={{ gap: `${gap}px` }}
               >
                 {week.map((day, dayIndex) => (
                   <div
