@@ -1,19 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { getUserDetails, updateUserDetails } from '@/utils/githubApi';
 import Hero from '@/components/Hero';
 import Dashboard from '@/components/Dashboard';
+import { getUserDetails, updateUserDetails, UserDetails, ContributionsMap } from '@/utils/githubApi';
 
 type ContributionData = {
   [date: string]: number;
 };
 
 export default function Home() {
-  const [contributions, setContributions] = useState<ContributionData>({});
-  const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
+  const [contributions, setContributions] = useState<ContributionsMap>({} as ContributionsMap);
 
   const handleFetch = async (username: string) => {
     setIsLoading(true);

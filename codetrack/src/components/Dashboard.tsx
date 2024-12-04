@@ -2,11 +2,11 @@ import ContributionForm from '@/components/ContributionForm';
 import ContributionHeatmap from '@/components/ContributionHeatmap';
 import UserProfile from '@/components/UserProfile';
 import { useState } from 'react';
-
+import { UserDetails } from '@/utils/githubApi';
 
 type DashboardProps = {
   username: string;
-  userDetails: UserDetails;
+  userDetails: UserDetails | null;
   contributions: { [date: string]: number };
   isLoading: boolean;
   onFetch: (username: string) => Promise<void>;
@@ -39,7 +39,7 @@ export default function Dashboard({ username, userDetails, contributions, isLoad
         </div>
       ) : (
         <>
-          <UserProfile user={userDetails} />
+          {userDetails && <UserProfile user={userDetails} />}
           <div className="w-full flex flex-col items-center gap-8">
             <section id="heatmap" className="w-3/5">
               <ContributionHeatmap contributions={contributions} />

@@ -23,7 +23,7 @@ export default function Hero({ onFetch, isLoading }: HeroProps) {
       {/* Content */}
       <div className="relative max-w-3xl w-full mx-auto px-4 flex flex-col items-center mt-48">
         {/* Heading Section */}
-        <div className="space-y-4 text-center mb-16">
+        <div className="space-y-4 text-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold text-content-light dark:text-content-dark">
             Visualize and Showcase Your <span className="text-primary animate-slideIn mt-2">
               Coding Journey

@@ -1,7 +1,7 @@
 const GITHUB_API_URL = 'https://api.github.com/graphql';
 const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_PAT;
 
-type UserDetails = {
+export type UserDetails = {
     name: string;
     createdAt: string;
     avatarUrl: string;
@@ -21,7 +21,7 @@ type ContributionWeek = {
     contributionDays: ContributionDay[];
 };
 
-type ContributionsMap = {
+export type ContributionsMap = {
     [date: string]: number;
 };
 
