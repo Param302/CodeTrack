@@ -15,7 +15,5 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-background-light dark:bg-background-dark text-content-light dark:text-content-dark transition-colors duration-200;
 }
