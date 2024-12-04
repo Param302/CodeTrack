@@ -9,21 +9,6 @@ type ContributionData = {
   [date: string]: number;
 };
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'github-heatmap': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & {
-          username: string;
-          width: string;
-          scale: string;
-        },
-        HTMLElement
-      >;
-    }
-  }
-}
-
 export default function Home() {
   const [contributions, setContributions] = useState<ContributionData>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -51,25 +36,14 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = `${process.env.NEXT_PUBLIC_APP_URL}/github-widget`;
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   const handleCopy = (type: 'script' | 'iframe', code: string) => {
     navigator.clipboard.writeText(code);
     setCopiedType(type);
     setTimeout(() => setCopiedType(null), 2000);
   };
 
-  const scriptCode = `<github-heatmap username="${username}" width="800"></github-heatmap>\n<script src="${process.env.NEXT_PUBLIC_APP_URL}/github-widget"></script>`;
-  const iframeCode = `<iframe src="${process.env.NEXT_PUBLIC_APP_URL}/embed/${username}" width="100%" height="200" frameborder="0"></iframe>`;
+  const scriptCode = `<github-heatmap username="${username}" scale="1"></github-heatmap>\n<script src="${process.env.NEXT_PUBLIC_APP_URL}/github-widget" defer></script>`;
+  const iframeCode = `<iframe src="${process.env.NEXT_PUBLIC_APP_URL}/embed/${username}" frameborder="0" width="800px" style="transform:scale(1); transform-origin:top left;border-radius:1rem"></iframe>`;
 
   return (
     <main className="my-32 flex flex-col items-center gap-12">
@@ -110,6 +84,8 @@ export default function Home() {
           <section id="heatmap" className="w-3/5">
             <ContributionHeatmap contributions={contributions} />
           </section>
+  <iframe src="http://localhost:3000/embed/Param302" width="800" style={{transform: 'scale(1.5)', transformOrigin: 'top left', borderRadius: '1rem'}}></iframe>
+
 
           <div className="w-[32rem] border border-gray-700 rounded-lg p-4 bg-gray-900">
             <button

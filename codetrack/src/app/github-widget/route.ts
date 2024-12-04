@@ -14,7 +14,6 @@ export async function GET(request: Request) {
         const baseUrl = 'https://code-track.vercel.app';
         console.log("Now baseUrl is ", baseUrl);
         const username = this.getAttribute('username');
-        const width = this.getAttribute('width');
         const scale = this.getAttribute('scale') || 1;
         const gap = this.getAttribute('gap') || 5;
         const borderRadius = this.getAttribute('borderRadius') || 3;
@@ -46,10 +45,8 @@ export async function GET(request: Request) {
         const iframe = document.createElement('iframe');
         iframe.src = \`\${baseUrl}/embed/\${username}?\${params.toString()}\`;
         iframe.frameBorder = '0';
-        iframe.style.width = width + 'px';
-        iframe.style.height = ((width / 53) * 8 + 30) + 'px';
-        iframe.style.border = 'none';
-        iframe.style.borderRadius = '10px';
+        iframe.style.width = '800px';
+        iframe.style.borderRadius = '1rem';
         iframe.style.transformOrigin = 'top left';
         iframe.style.transform = \`scale(\${scale})\`;
 
