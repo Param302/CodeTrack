@@ -4,10 +4,10 @@ interface UserProfileProps {
     bio: string;
     avatarUrl: string;
     createdAt: string;
-    pronouns?: string;
-    followers: number;
-    following: number;
-    repositories: number;
+    pronouns: string;
+    followers: { totalCount: number };
+    following: { totalCount: number };
+    repositories: { totalCount: number };
   };
 }
 
@@ -31,15 +31,15 @@ export default function UserProfile({ user }: UserProfileProps) {
       
       <div className="grid grid-cols-3 gap-4 mt-6">
         <div className="text-center">
-          <div className="text-2xl font-bold">{user.repositories}</div>
+          <div className="text-2xl font-bold">{user.repositories.totalCount}</div>
           <div className="text-sm text-gray-500">Repositories</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl font-bold">{user.followers}</div>
+          <div className="text-2xl font-bold">{user.followers.totalCount}</div>
           <div className="text-sm text-gray-500">Followers</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl font-bold">{user.following}</div>
+          <div className="text-2xl font-bold">{user.following.totalCount}</div>
           <div className="text-sm text-gray-500">Following</div>
         </div>
       </div>

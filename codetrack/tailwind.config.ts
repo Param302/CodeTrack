@@ -16,11 +16,11 @@ const config: Config = {
           dark: '#5DADE2',
         },
         background: {
-          light: '#FFFFFF',
+          light: '#F5F9FF',
           dark: '#1B1E23',
         },
         card: {
-          light: '#F8F9FA',
+          light: '#FAFCFF',
           dark: '#2C2F33',
         },
         content: {
@@ -57,7 +57,7 @@ const config: Config = {
         slideUp: 'slideUp 0.5s ease-out 0.3s both',
       },
       backgroundImage: {
-        'radial-light': 'radial-gradient(circle at center, rgba(0, 123, 255, 0.05) 0%, transparent 70%)',
+        'radial-light': 'radial-gradient(circle at center, rgba(173, 216, 230, 0.15) 0%, rgba(240, 248, 255, 0.05) 70%)',
         'radial-dark': 'radial-gradient(circle at center, rgba(93, 173, 226, 0.05) 0%, transparent 70%)',
       },
     },
