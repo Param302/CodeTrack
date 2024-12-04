@@ -28,7 +28,7 @@ export default function Dashboard({ username, userDetails, contributions, isLoad
   const iframeCode = `<iframe src="${process.env.NEXT_PUBLIC_APP_URL}/embed/${username}" frameborder="0" width="800px" style="transform:scale(1); transform-origin:top left;border-radius:1rem"></iframe>`;
 
   return (
-    <main className="min-h-screen min-w-screen flex flex-col items-center justify-center px-32 pt-32">
+    <main className="min-h-screen min-w-screen flex flex-col items-center justify-center gap-8 px-32 pt-32">
       {isLoading ? (
         <div className="flex flex-col items-center gap-2">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
@@ -37,25 +37,25 @@ export default function Dashboard({ username, userDetails, contributions, isLoad
       ) : (
         <>
           {userDetails && (
-            <section className="w-full mb-16 rounded-xl p-8 shadow-lg">
+            <section className="w-full rounded-xl p-8 bg-gray-800/50 shadow-lg">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-1">
                   <UserProfile user={userDetails} />
                 </div>
 
                 <div className="lg:col-span-2 space-y-8">
-                  <div className="rounded-lg p-6">
+                  <div className="rounded-lg p-6 bg-gray-800/50">
                     <h3 className="text-xl font-semibold mb-4">Contribution Activity</h3>
                     <ContributionHeatmap contributions={contributions} />
                   </div>
 
-                  <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg p-6 border border-blue-500/20">
+                  <div className="rounded-lg p-6 bg-gray-800/50 border border-blue-500/20">
                     <button
                       onClick={() => setIsEmbedOpen(!isEmbedOpen)}
-                      className="w-full flex items-center justify-between text-lg font-bold p-4 rounded-lg transition-colors text-white shadow-lg"
+                      className="w-full flex items-center justify-between text-lg font-bold p-4 rounded-lg transition-colors text-white shadow-lg bg-blue-500/20 hover:bg-blue-500/30"
                     >
                       <div className="flex-1" />
-                      <div className="flex-1 text-center">Embed This Widget</div>
+                      <div className="flex-1 text-center ">Embed This Widget</div>
                       <div className="flex-1 flex justify-end">
                         <svg
                           className={`w-5 h-5 transform transition-transform ${isEmbedOpen ? 'rotate-180' : ''}`}
@@ -142,7 +142,7 @@ export default function Dashboard({ username, userDetails, contributions, isLoad
           )}
 
           <section className="w-full p-8">
-            <h2 className="text-xl font-semibold mb-6 text-center">Have another profile to track?</h2>
+            <h2 className="text-xl font-semibold text-center">Have another profile to track?</h2>
             <ContributionForm onFetch={onFetch} isLoading={isLoading} />
           </section>
         </>
