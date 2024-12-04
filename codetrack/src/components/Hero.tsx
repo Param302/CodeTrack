@@ -11,19 +11,19 @@ export default function Hero({ onFetch, isLoading }: HeroProps) {
       {/* Gradient Background - Light and Dark mode compatible */}
       <div className="absolute inset-0">
         {/* Primary gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background-light via-background-light to-secondary-light/20 dark:from-background-dark dark:via-background-dark dark:to-secondary-dark/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background-light via-[#EDF5FF] to-secondary-light/30 dark:from-background-dark dark:via-background-dark dark:to-secondary-dark/20" />
 
         {/* Accent gradient for depth */}
-        <div className="absolute inset-0 bg-gradient-to-tl from-primary/5 via-transparent to-transparent dark:from-primary/10 dark:via-transparent dark:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-primary/10 via-transparent to-transparent dark:from-primary/10 dark:via-transparent dark:to-transparent" />
 
         {/* Subtle radial gradient for center focus */}
         <div className="absolute inset-0 bg-radial-light dark:bg-radial-dark opacity-40" />
       </div>
 
       {/* Content */}
-      <div className="relative max-w-3xl w-full mx-auto px-4 flex flex-col items-center mt-48">
+      <div className="relative max-w-3xl w-full mx-auto px-4 flex flex-col items-center justify-center min-h-screen">
         {/* Heading Section */}
-        <div className="space-y-4 text-center mb-12">
+        <div className="space-y-4 text-center mb-12 -mt-32">
           <h1 className="text-4xl sm:text-5xl font-bold text-content-light dark:text-content-dark">
             Visualize and Showcase Your <span className="text-primary animate-slideIn mt-2">
               Coding Journey
@@ -41,7 +41,7 @@ export default function Hero({ onFetch, isLoading }: HeroProps) {
         </div>
 
         {/* New Section */}
-        <div className=" mx-auto max-w-md flex items-center gap-3 px-6 py-4 bg-blue-500/20 border border-blue-500/20 rounded-lg animate-fadeIn shadow-[0_35px_20px_-25px_rgba(59,130,246,0.1)] transition-shadow duration-300">
+        <div className="mt-12 mx-auto max-w-md flex items-center gap-3 px-6 py-4 bg-blue-500/20 border border-blue-500/20 rounded-lg animate-fadeIn shadow-[0_35px_20px_-25px_rgba(59,130,246,0.1)] transition-shadow duration-300">
           <svg
             className="w-5 h-5 flex-shrink-0 text-blue-500"
             fill="none"
