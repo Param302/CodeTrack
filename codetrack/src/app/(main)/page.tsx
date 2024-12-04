@@ -84,9 +84,7 @@ export default function Home() {
           <section id="heatmap" className="w-3/5">
             <ContributionHeatmap contributions={contributions} />
           </section>
-  <iframe src="http://localhost:3000/embed/Param302" width="800" style={{transform: 'scale(1.5)', transformOrigin: 'top left', borderRadius: '1rem'}}></iframe>
-
-
+          
           <div className="w-[32rem] border border-gray-700 rounded-lg p-4 bg-gray-900">
             <button
               onClick={() => setIsEmbedOpen(!isEmbedOpen)}
