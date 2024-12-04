@@ -85,7 +85,7 @@ export default function ContributionHeatmap({ contributions, gap = 5, borderRadi
   }
 
   return (
-    <div className="flex flex-col w-full h-full bg-gray-700 rounded-lg p-4 pb-1">
+    <div className="flex flex-col w-full h-full bg-gray-700 rounded-[1rem] px-4 py-3">
       <div className="flex-grow">
         <div className="w-full h-full">
           <div className={`flex flex-wrap justify-around h-full`}

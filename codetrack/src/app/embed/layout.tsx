@@ -16,6 +16,7 @@ export default function EmbedLayout({
       <body className="m-0 p-0" style={{ 
         width: '100%',
         height: '100%',
+        overflow: 'hidden'
       }}>{children}</body>
     </html>
   );
