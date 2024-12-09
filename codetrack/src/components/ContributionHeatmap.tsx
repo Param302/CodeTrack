@@ -12,7 +12,6 @@ interface Props {
   contributions: ContributionData;
   gap?: number;
   borderRadius?: number;
-  darkMode?: boolean;
   theme?: string;
   reverse?: boolean;
   showTotalContributions?: boolean;
@@ -23,7 +22,7 @@ interface Props {
   shareableSnapshot?: boolean;
 }
 
-export default function ContributionHeatmap({ contributions, gap = 5, borderRadius = 3, darkMode = true, theme = 'github', reverse = false, showTotalContributions = false, showProfileData = false, showTooltip = false, showWeekdays = false, showMonths = false, shareableSnapshot = false }: Props) {
+export default function ContributionHeatmap({ contributions, gap = 5, borderRadius = 3, theme = 'github', showTotalContributions = false, showProfileData = false, showTooltip = false, showWeekdays = false, showMonths = false, shareableSnapshot = false }: Props) {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [weekData, setWeekData] = useState<Array<Array<{date: string; count: number}>>>([]);
   const themeData = themes[theme];

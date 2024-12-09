@@ -34,9 +34,7 @@ function EmbedPageContent() {
       contributions={contributions}
       gap={Number(searchParams.get('gap'))}
       borderRadius={Number(searchParams.get('borderRadius'))}
-      darkMode={searchParams.get('darkMode') === 'true'}
-      theme={searchParams.get('theme') || 'github'}
-      reverse={searchParams.get('reverse') === 'true'}
+      theme={searchParams.get('theme') || 'github-dark'}
       showTotalContributions={searchParams.get('showTotalContributions') === 'true'}
       showProfileData={searchParams.get('showProfileData') === 'true'}
       showTooltip={searchParams.get('showTooltip') === 'true'}

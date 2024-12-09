@@ -1,6 +1,6 @@
 export const themes : { [key: string]: { name: string, colors: string[] } } = {
     github: {
-      name: "GitHub",
+      name: "github-dark",
       // provide github heatmap colors
       colors: ["#39d353", "#26a641", "#006d32", "#0e4429", "#161b22"]
     //   colors: ["#0e4429", "#006d32", "#26a641", "#39d353", "#ebedf0"], // Green shades

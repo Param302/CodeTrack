@@ -14,9 +14,7 @@ export default async function Page({ params, searchParams }: PageProps) {
       username={resolvedParams.username}
       gap={resolvedSearchParams?.gap ? Number(resolvedSearchParams.gap) : undefined}
       borderRadius={resolvedSearchParams?.borderRadius ? Number(resolvedSearchParams.borderRadius) : undefined}
-      darkMode={resolvedSearchParams?.darkMode === 'true'}
       theme={resolvedSearchParams?.theme?.toString()}
-      reverse={resolvedSearchParams?.reverse === 'true'}
       showTotalContributions={resolvedSearchParams?.showTotalContributions === 'true'}
       showProfileData={resolvedSearchParams?.showProfileData === 'true'}
       showTooltip={resolvedSearchParams?.showTooltip === 'true'}

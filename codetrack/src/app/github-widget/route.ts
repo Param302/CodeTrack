@@ -17,9 +17,7 @@ export async function GET(request: Request) {
         const scale = this.getAttribute('scale') || 1;
         const gap = this.getAttribute('gap') || 5;
         const borderRadius = this.getAttribute('borderRadius') || 3;
-        const darkMode = this.getAttribute('darkMode') !== 'false';
-        const theme = this.getAttribute('theme') || 'github';
-        const reverse = this.getAttribute('reverse') === 'true';
+        const theme = this.getAttribute('theme') || 'github-dark';
         const showTotalContributions = this.getAttribute('showTotalContributions') === 'true';
         const showProfileData = this.getAttribute('showProfileData') === 'true';
         const showTooltip = this.getAttribute('showTooltip') === 'true';
@@ -31,9 +29,7 @@ export async function GET(request: Request) {
         const params = new URLSearchParams({
           gap: gap.toString(),
           borderRadius: borderRadius.toString(),
-          darkMode: darkMode.toString(),
           theme,
-          reverse: reverse.toString(),
           showTotalContributions: showTotalContributions.toString(),
           showProfileData: showProfileData.toString(),
           showTooltip: showTooltip.toString(),

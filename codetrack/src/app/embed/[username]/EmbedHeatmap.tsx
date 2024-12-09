@@ -5,7 +5,7 @@ import ContributionHeatmap from '@/components/ContributionHeatmap';
 import { getUserDetails } from '@/utils/githubApi';
 
 
-export default function EmbedHeatmap({ username, width, gap, borderRadius, darkMode, theme, reverse, showTotalContributions, showProfileData, showTooltip, showWeekdays, showMonths, shareableSnapshot }: { username: string, width?: number, gap?: number, borderRadius?: number, darkMode?: boolean, theme?: string, reverse?: boolean, showTotalContributions?: boolean, showProfileData?: boolean, showTooltip?: boolean, showWeekdays?: boolean, showMonths?: boolean, shareableSnapshot?: boolean }) {
+export default function EmbedHeatmap({ username, width, gap, borderRadius, theme, showTotalContributions, showProfileData, showTooltip, showWeekdays, showMonths, shareableSnapshot }: { username: string, width?: number, gap?: number, borderRadius?: number, theme?: string, showTotalContributions?: boolean, showProfileData?: boolean, showTooltip?: boolean, showWeekdays?: boolean, showMonths?: boolean, shareableSnapshot?: boolean }) {
   const [contributions, setContributions] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -33,17 +33,11 @@ export default function EmbedHeatmap({ username, width, gap, borderRadius, darkM
 
   return (
     <div className="w-full h-full">
-      {/* <div style={{ 
-        width: width ? `${width}px` : '900px',  // Fixed width
-        height: 
-      }}> */}
         <ContributionHeatmap 
           contributions={contributions} 
           gap={gap} 
           borderRadius={borderRadius}
-          darkMode={darkMode}
           theme={theme}
-          reverse={reverse}
           showTotalContributions={showTotalContributions}
           showProfileData={showProfileData}
           showTooltip={showTooltip}
@@ -52,6 +46,5 @@ export default function EmbedHeatmap({ username, width, gap, borderRadius, darkM
           shareableSnapshot={shareableSnapshot}
         />
       </div>
-    // </div>
   );
 }
