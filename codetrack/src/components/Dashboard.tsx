@@ -4,6 +4,7 @@ import EmbedSection from "@/components/EmbedSection";
 import UserProfile from "@/components/UserProfile";
 import { useState } from "react";
 import { UserDetails } from "@/utils/githubApi";
+import HeatmapOptions from "./HeatmapOptions";
 
 type DashboardProps = {
   username: string;
@@ -52,6 +53,18 @@ export default function Dashboard({
                 </div>
               </div>
               <EmbedSection username={username} />
+              <HeatmapOptions
+                scale={1}
+                gap={2}
+                roundness={3}
+                theme="dark"
+                themePreset="github"
+                showProfile={1}
+                showTotalContributions={1}
+                showTooltip={1}
+                showWeekdays={1}
+                showMonths={1}
+              />
             </section>
           )}
 

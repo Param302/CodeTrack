@@ -18,7 +18,7 @@ export default function UserProfile({ user }: UserProfileProps) {
         <img 
           src={user.avatarUrl} 
           alt={user.name} 
-          className="w-16 h-16 rounded-full"
+          className="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700"
         />
         <div className="flex-1">
           <h2 className="text-xl font-bold">{user.name}</h2>
