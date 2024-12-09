@@ -24,14 +24,14 @@ export default function Hero({ onFetch, isLoading }: HeroProps) {
       <div className="relative max-w-3xl w-full mx-auto px-4 flex flex-col items-center justify-center min-h-screen">
         {/* Heading Section */}
         <div className="space-y-4 text-center mb-12 -mt-32">
-          <h1 className="text-4xl sm:text-5xl font-bold text-content-light dark:text-content-dark">
-            Visualize and Showcase Your <span className="text-primary animate-slideIn mt-2">
-              Coding Journey
+          <h1 className="text-4xl sm:text-5xl font-medium text-content-light dark:text-content-dark">
+            Visualize and Showcase Your <span className="text-primary animate-slideIn mt-2 font-semibold">
+            &lt;Coding Journey/&gt;
             </span>
           </h1>
 
           <p className="text-lg text-subtle-light dark:text-subtle-dark animate-slideUp">
-            <code className="text-primary">&lt;embed/&gt;</code> your GitHub contribution graph with one line of code.
+            <code className="text-primary italic font-medium">&lt;embed/&gt;</code> your GitHub contribution graph with one line of code.
           </p>
         </div>
 
@@ -50,7 +50,7 @@ export default function Hero({ onFetch, isLoading }: HeroProps) {
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
           </svg>
-          <p className="text-blue-950 dark:text-blue-200 font-medium">
+          <p className="text-primary font-medium">
             Enter your GitHub username to see graph
           </p>
         </div>
