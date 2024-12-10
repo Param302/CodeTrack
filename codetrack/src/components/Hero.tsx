@@ -37,7 +37,7 @@ export default function Hero({ onFetch, isLoading }: HeroProps) {
         </div>
 
         {/* Form Section - Centered */}
-        <div className="animate-slideUp">
+        <div className="animate-slideUp py-8">
           <ContributionForm onFetch={onFetch} isLoading={isLoading} />
         </div>
 

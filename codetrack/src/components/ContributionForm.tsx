@@ -19,7 +19,7 @@ export default function ContributionForm({ onFetch, isLoading }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto px-4 py-8">
+    <form onSubmit={handleSubmit} className="w-full max-w-xl">
       <div className={`
         flex flex-col sm:flex-row gap-4 p-1 pr-2.5
         bg-gradient-to-r from-blue-50 dark:from-slate-800 to-blue-100 dark:to-gray-900 border-2 border-primary dark:border-blue-800
