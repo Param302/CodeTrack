@@ -40,10 +40,10 @@ const config: Config = {
   				dark: '#A0AEC0'
   			},
   			highlight: '#32CD32',
-        border: {
-          light: '#B0C4DE',
-          dark: '#3B3F44',
-        },
+			border: {
+			light: '#B0C4DE',
+			dark: '#3B3F44',
+			},
   			// foreground: 'hsl(var(--foreground))',
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
