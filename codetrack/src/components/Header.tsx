@@ -26,15 +26,14 @@ export default function Header() {
     <header className="fixed top-0 flex justify-between items-center w-screen px-6 py-4 transition-colors duration-200 z-50 backdrop-blur-lg">
       <div className="flex-1">
       </div>
-
-      <div className="flex items-center gap-3">
+      <Link href={`${process.env.NEXT_PUBLIC_APP_URL}`} className="flex items-center gap-3">
         <div className="w-7 h-7 bg-primary rounded-sm">
           {/* Logo placeholder */}
         </div>
         <h1 className="text-3xl font-semibold text-content-light dark:text-content-dark">
           Code Track
         </h1>
-      </div>
+      </Link>
 
       <div className="flex-1 flex justify-end items-center gap-4">
         <Link
@@ -42,16 +41,13 @@ export default function Header() {
           target="_blank"
           className="text-2xl text-content-light dark:text-content-dark hover:text-primary transition-colors"
         >
-          <div className="bg-gray-300 text-secondary">
-
-          <TbBrandGithubFilled className="scale-110" />
-          </div>
+          <TbBrandGithubFilled className="w-7 h-7 transition-transform duration-200 hover:translate-y-0.5 hover:text-primary" />
         </Link>
         <Link
           href="mailto:connectwithparam.30@gmail.com"
           className="text-2xl text-content-light dark:text-content-dark hover:text-primary transition-colors"
         >
-          <MdEmail />
+          <MdEmail className="w-7 h-7 transition-transform duration-200 hover:translate-y-0.5 hover:text-primary" />
         </Link>
         <button 
           className="ml-4 p-2 rounded-lg text-content-light dark:text-content-dark hover:bg-secondary-light dark:hover:bg-secondary-dark/20 transition-colors"

@@ -10,22 +10,25 @@ interface Props {
 export default function ContributionForm({ onFetch, isLoading }: Props) {
   const [username, setUsername] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     onFetch(username);
   };
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto px-4 py-8">
       <div className={`
-        flex flex-col sm:flex-row gap-4 p-2 pr-3
-        bg-gradient-to-r from-gray-800 to-gray-900 border-2 border-gray-900
-        rounded-md transition-all duration-300 max-w-md mx-auto
-        ${isFocused ? 'shadow-lg shadow-blue-500/20' : 'shadow-md shadow-gray-900/5'}
+        flex flex-col sm:flex-row gap-4 p-1 pr-2.5
+        bg-gradient-to-r from-blue-50 dark:from-slate-800 to-blue-100 dark:to-gray-900 border-2 border-primary dark:border-blue-800
+        rounded-lg transition-all duration-300 max-w-md mx-auto
+        ${isFocused ? 'shadow-lg shadow-gray-500 dark:shadow-gray-800' : 'shadow-md shadow-gray-500/50 dark:shadow-gray-800/50'}
       `}>
-        <div className="flex-1 flex items-center gap-3 rounded-lg px-3">
-          <FiUser className="w-6 h-6 text-gray-400 flex-shrink-0" />
+        <div className="flex-1 flex items-center gap-3 rounded-lg px-3 group">
+          <FiUser className="w-6 h-6 text-primary/60 flex-shrink-0 transition-colors group-focus-within:text-primary" />
+
           <input
             type="text"
             value={username}
@@ -33,7 +36,7 @@ export default function ContributionForm({ onFetch, isLoading }: Props) {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder="Enter GitHub username"
-            className="w-full bg-transparent text-white placeholder-gray-400 outline-none text-md focused"
+            className="w-full font-medium bg-transparent text-gray-900 placeholder:text-gray-400 placeholder:dark:text-gray-600 dark:text-white placeholder-gray-400 outline-none text-md focused"
             required 
           />
         </div>
@@ -47,8 +50,9 @@ export default function ContributionForm({ onFetch, isLoading }: Props) {
             border border-blue-400/20
             ${isLoading 
               ? 'opacity-60 cursor-not-allowed'
-              : 'hover:from-blue-600 hover:to-blue-700 active:scale-95 hover:translate-x-1'
+              : 'hover:from-blue-600 hover:to-blue-700 active:translate-x-2 hover:translate-x-0.5 active:translate-x-1'
             }
+            ${isSubmitting ? "translate-x-2" : ""}
           `}
         >
           {isLoading ? (

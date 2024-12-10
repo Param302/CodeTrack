@@ -32,7 +32,7 @@ export default function Hero({ onFetch, isLoading }: HeroProps) {
           </h1>
 
           <p className="text-lg text-subtle-light dark:text-subtle-dark animate-slideUp">
-            <code className="text-primary italic font-semibold">&lt;embed/&gt; </code> your GitHub contribution graph with one line of code.
+            <code className="text-primary font-semibold relative">&lt;embed/&gt; </code> your GitHub contribution graph with one line of code.
           </p>
         </div>
 
@@ -42,7 +42,7 @@ export default function Hero({ onFetch, isLoading }: HeroProps) {
         </div>
 
         {/* New Section */}
-        <div className="mt-12 mx-auto max-w-md flex items-center gap-3 px-6 py-4 bg-blue-500/20 dark:bg-blue-500/10 border border-blue-500/20 rounded-sm animate-fadeIn shadow-[0_35px_20px_-25px_rgba(59,130,246,0.1)] transition-shadow duration-300">
+        <div className="mt-12 mx-auto max-w-md flex items-center gap-3 px-6 py-4 bg-blue-500/20 dark:bg-blue-500/10 border border-blue-500/20 rounded-md animate-fadeIn shadow-[0_35px_20px_-25px_rgba(59,130,246,0.1)] transition-shadow duration-300">
           <HiOutlineCursorClick className="w-6 h-6 text-blue-500" />
           <p className="text-primary font-medium dark:font-normal">
             Enter your GitHub username to see graph
